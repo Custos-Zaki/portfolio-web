@@ -8,6 +8,7 @@ interface Props {
 const { project } = Astro.props;
 const { title, description, date, tags, coverImage, category } = project.data;
 const baseUrl = import.meta.env.BASE_URL;
+const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
 
 // Format date
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -17,7 +18,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 ---
 
 <a 
-  href={`${baseUrl}projects/${project.id}/`} 
+  href={`${cleanBase}projects/${project.id}/`} 
   class="group block relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/40 p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/50 hover:bg-brand-primary/60 hover:shadow-brand-lg cursor-pointer"
 >
   <!-- Hover glow effect -->
@@ -28,7 +29,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       <!-- Cover Image Wrapper -->
       <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-bg/50 mb-4 border border-brand-primary/50">
         <img 
-          src={`${baseUrl}images/${coverImage}`} 
+          src={`${cleanBase}images/${coverImage}`} 
           alt={`${title} Cover`}
           class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
