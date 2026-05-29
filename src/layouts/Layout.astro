@@ -42,11 +42,11 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-brand-bg relative overflow-x-hidden">
     <!-- Animated & Scroll-Responsive Glow Background -->
-    <div id="parallax-glow-1" class="fixed top-[-15%] left-[-15%] -z-10 h-[650px] w-[650px] pointer-events-none select-none will-change-transform">
-      <div class="h-full w-full rounded-full bg-[radial-gradient(circle,_rgba(0,110,255,0.28)_0%,_rgba(0,110,255,0)_70%)] blur-[80px] animate-glow-left"></div>
+    <div id="parallax-glow-1" class="fixed top-[-150px] left-[-150px] sm:top-[-250px] sm:left-[-250px] -z-10 h-[500px] w-[500px] sm:h-[850px] sm:w-[850px] pointer-events-none select-none will-change-transform">
+      <div class="h-full w-full rounded-full bg-[radial-gradient(circle,_rgba(0,110,255,0.48)_0%,_rgba(0,110,255,0.18)_45%,_rgba(0,110,255,0)_100%)] blur-[70px] sm:blur-[90px] animate-glow-left"></div>
     </div>
-    <div id="parallax-glow-2" class="fixed bottom-[-15%] right-[-15%] -z-10 h-[650px] w-[650px] pointer-events-none select-none will-change-transform">
-      <div class="h-full w-full rounded-full bg-[radial-gradient(circle,_rgba(123,97,255,0.22)_0%,_rgba(123,97,255,0)_70%)] blur-[80px] animate-glow-right"></div>
+    <div id="parallax-glow-2" class="fixed bottom-[-150px] right-[-150px] sm:bottom-[-250px] sm:right-[-250px] -z-10 h-[500px] w-[500px] sm:h-[850px] sm:w-[850px] pointer-events-none select-none will-change-transform">
+      <div class="h-full w-full rounded-full bg-[radial-gradient(circle,_rgba(123,97,255,0.38)_0%,_rgba(123,97,255,0.12)_45%,_rgba(123,97,255,0)_100%)] blur-[70px] sm:blur-[90px] animate-glow-right"></div>
     </div>
     
     <!-- Cyber Grid Overlay -->
@@ -146,8 +146,8 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
               window.requestAnimationFrame(() => {
                 const scrolled = window.scrollY;
                 // Parallax translation: glow source shifts as user scrolls
-                glowLeft.style.transform = `translate(${scrolled * 0.08}px, ${scrolled * 0.04}px)`;
-                glowRight.style.transform = `translate(${scrolled * -0.08}px, ${scrolled * -0.04}px)`;
+                glowLeft.style.transform = `translate(${scrolled * 0.12}px, ${scrolled * 0.08}px)`;
+                glowRight.style.transform = `translate(${scrolled * -0.12}px, ${scrolled * -0.08}px)`;
                 ticking = false;
               });
               ticking = true;
