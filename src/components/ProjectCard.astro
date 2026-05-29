@@ -19,49 +19,57 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
 <a 
   href={`${cleanBase}projects/${project.id}/`} 
-  class="group block relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/40 p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/50 hover:bg-brand-primary/60 hover:shadow-brand-lg cursor-pointer"
+  class="group block relative overflow-hidden rounded-xl border border-brand-secondary/60 bg-brand-primary p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/30 hover:shadow-[0_0_20px_rgba(0,212,255,0.06)] cursor-pointer"
 >
-  <!-- Hover glow effect -->
-  <div class="absolute -inset-px rounded-xl bg-gradient-to-r from-brand-accent/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+  <!-- Cyber-grid ambient accent inside card -->
+  <div class="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"></div>
 
   <div class="relative z-10 flex flex-col h-full justify-between">
     <div>
-      <!-- Cover Image Wrapper -->
-      <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-bg/50 mb-4 border border-brand-primary/50">
+      <!-- Cover Image Wrapper with HUD Frame -->
+      <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-bg mb-4 border border-brand-secondary/60">
         <img 
           src={`${cleanBase}images/${coverImage}`} 
           alt={`${title} Cover`}
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-102"
           loading="lazy"
         />
-        <span class="absolute top-2 left-2 rounded-full bg-brand-bg/90 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20">
+        <!-- Tech HUD corner overlays -->
+        <div class="absolute top-1.5 right-1.5 h-2.5 w-2.5 border-t-2 border-r-2 border-brand-accent/30"></div>
+        <div class="absolute bottom-1.5 left-1.5 h-2.5 w-2.5 border-b-2 border-l-2 border-brand-accent/30"></div>
+        
+        <span class="absolute top-2.5 left-2.5 rounded bg-brand-bg/95 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-brand-accent border border-brand-accent/20">
           {category}
         </span>
       </div>
 
       <!-- Date and Meta -->
-      <div class="flex items-center gap-2 text-xs text-brand-muted mb-2 font-medium">
+      <div class="flex items-center justify-between text-[11px] font-mono text-brand-muted mb-2">
         <time datetime={date.toISOString()}>{formattedDate}</time>
-        <span>•</span>
-        <span>{project.data.visualizations.length} Visuals</span>
+        <div class="flex items-center gap-1 text-brand-accent/80">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
+          </svg>
+          <span>{project.data.visualizations.length} Visuals</span>
+        </div>
       </div>
 
       <!-- Title -->
-      <h3 class="font-display text-xl font-bold tracking-tight text-brand-text group-hover:text-brand-accent transition-colors duration-250 mb-2">
+      <h3 class="font-display text-lg font-bold tracking-tight text-brand-text group-hover:text-brand-accent transition-colors duration-200 mb-2">
         {title}
       </h3>
 
       <!-- Description -->
-      <p class="text-sm text-brand-muted line-clamp-3 mb-4 leading-relaxed font-sans">
+      <p class="text-xs text-brand-muted line-clamp-3 mb-4 leading-relaxed font-sans">
         {description}
       </p>
     </div>
 
     <!-- Tags footer -->
-    <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
+    <div class="flex flex-wrap gap-1.5 mt-auto pt-3 border-t border-brand-secondary/40">
       {tags.map((tag) => (
-        <span class="rounded bg-brand-secondary/40 px-2 py-0.5 text-xs text-brand-muted border border-brand-secondary/30 transition-colors duration-200 group-hover:border-brand-accent/10">
-          {tag}
+        <span class="rounded bg-brand-secondary/50 px-2 py-0.5 text-[10px] font-mono text-brand-muted border border-brand-secondary/35 transition-colors duration-200 group-hover:border-brand-accent/15 group-hover:text-brand-text">
+          #{tag}
         </span>
       ))}
     </div>

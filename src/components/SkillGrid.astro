@@ -35,12 +35,12 @@ const skills = [
 
 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
   {skills.map((skill) => (
-    <div class="relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/20 p-6 shadow-brand-sm transition-all duration-300 hover:border-brand-accent/30 hover:bg-brand-primary/30">
+    <div class="relative overflow-hidden rounded-xl border border-brand-secondary/60 bg-brand-primary p-6 shadow-brand-sm transition-all duration-300 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
       <div class="flex items-center justify-between mb-3">
         <h4 class="font-display text-lg font-bold text-brand-text">
           {skill.name}
         </h4>
-        <span class="inline-flex items-center rounded-full bg-brand-accent/10 px-2 py-0.5 text-[10px] font-medium text-brand-accent border border-brand-accent/20">
+        <span class="inline-flex items-center rounded bg-brand-accent/10 px-2 py-0.5 text-[10px] font-mono text-brand-accent border border-brand-accent/20">
           {skill.level}
         </span>
       </div>

@@ -12,28 +12,50 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
 
 <Layout title="Muhammad Zaki Rifa'at | Quantitative Research & Statistical Modeling">
   <!-- Hero Section -->
-  <section class="relative overflow-hidden py-16 sm:py-24 border-b border-brand-primary/50">
+  <section class="relative overflow-hidden py-16 sm:py-24 border-b border-brand-secondary/60">
     <!-- Grid overlay pattern -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-accent/5 via-transparent to-transparent"></div>
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b12_1px,transparent_1px),linear-gradient(to_bottom,#1e293b12_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#00d4ff05_1px,transparent_1px),linear-gradient(to_bottom,#00d4ff05_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
 
     <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center sm:text-left">
       <div class="flex flex-col sm:flex-row items-center gap-8 md:gap-12">
-        <!-- Profile Avatar -->
-        <div class="relative flex-shrink-0 animate-fade-in">
-          <div class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-brand-accent to-brand-secondary opacity-75 blur-md"></div>
-          <div class="relative h-32 w-32 md:h-40 md:w-40 overflow-hidden rounded-full border-2 border-brand-accent/30 bg-brand-primary">
-            <img 
-              src={`${cleanBase}images/profil_pictures.png`} 
-              alt="Muhammad Zaki Rifa'at" 
-              class="h-full w-full object-cover"
-            />
+        
+        <!-- Profile Hexagon Avatar & Orbits -->
+        <div class="relative flex items-center justify-center p-6 select-none flex-shrink-0 animate-fade-in mx-auto sm:mx-0">
+          <!-- Ambient Glow behind Hexagon -->
+          <div class="absolute inset-0 -z-10 h-[220px] w-[220px] m-auto rounded-full bg-brand-accent/10 blur-xl pointer-events-none"></div>
+
+          <!-- Hexagon Wrapper -->
+          <div class="relative z-10">
+            <div class="hexagon-wrapper">
+              <div class="hexagon-border"></div>
+              <div class="hexagon-inner">
+                <img 
+                  src={`${cleanBase}images/profil_pictures.png`} 
+                  alt="Muhammad Zaki Rifa'at" 
+                  class="h-full w-full object-cover object-top scale-[1.03] transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop Floating Orbit Tags -->
+          <div class="hidden md:block absolute inset-0 z-20 pointer-events-none">
+            <span class="absolute top-[10%] left-[-20px] px-2.5 py-0.5 rounded border border-brand-accent/30 bg-brand-primary/95 text-[10px] font-mono text-brand-accent shadow-[0_0_8px_rgba(0,212,255,0.15)]">Python</span>
+            <span class="absolute top-[38%] left-[-40px] px-2 py-0.5 rounded border border-brand-muted/20 bg-brand-primary/90 text-[9px] font-mono text-brand-muted">R</span>
+            <span class="absolute bottom-[20%] left-[-30px] px-2.5 py-0.5 rounded border border-brand-accent/20 bg-brand-primary/95 text-[10px] font-mono text-brand-text">Machine Learning</span>
+            <span class="absolute bottom-[-5%] left-[20px] px-2.5 py-0.5 rounded border border-brand-muted/20 bg-brand-primary/90 text-[10px] font-mono text-brand-muted">SQL</span>
+            
+            <span class="absolute top-[5%] right-[-10px] px-2.5 py-0.5 rounded border border-brand-muted/20 bg-brand-primary/90 text-[10px] font-mono text-brand-muted">Time Series</span>
+            <span class="absolute top-[35%] right-[-40px] px-2.5 py-0.5 rounded border border-brand-accent/20 bg-brand-primary/95 text-[10px] font-mono text-brand-text shadow-[0_0_8px_rgba(123,97,255,0.08)]">Statistical Modeling</span>
+            <span class="absolute bottom-[25%] right-[-30px] px-2.5 py-0.5 rounded border border-brand-accent/30 bg-brand-primary/95 text-[10px] font-mono text-brand-accent">MQL5</span>
+            <span class="absolute bottom-[-5%] right-[0px] px-2.5 py-0.5 rounded border border-brand-muted/20 bg-brand-primary/90 text-[10px] font-mono text-brand-muted">Forecasting</span>
           </div>
         </div>
 
         <!-- Bio Content -->
         <div class="flex-grow animate-fade-in-up">
-          <div class="inline-flex items-center rounded-full bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-accent border border-brand-accent/20 mb-4">
+          <div class="inline-flex items-center rounded bg-brand-accent/10 px-3 py-1 text-xs font-mono text-brand-accent border border-brand-accent/20 mb-4 justify-center sm:justify-start">
             <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-brand-accent animate-pulse"></span> Available for Research
           </div>
           <h1 class="font-display text-3xl font-extrabold tracking-tight text-brand-text sm:text-4xl md:text-5xl leading-tight">
@@ -42,7 +64,7 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
           <p class="mt-2 font-display text-lg font-bold text-brand-accent sm:text-xl">
             Quantitative Research & Statistical Modeling
           </p>
-          <h2 class="mt-4 text-base text-brand-text font-medium leading-relaxed max-w-2xl">
+          <h2 class="mt-4 text-base text-brand-text/90 font-medium leading-relaxed max-w-2xl">
             "Statistics Student Building Intelligent Data Systems | Quantitative Researcher & Algorithmic Trading Developer."
           </h2>
           <p class="mt-4 text-sm text-brand-muted leading-relaxed max-w-2xl font-sans">
@@ -53,17 +75,49 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
           <div class="mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-4">
             <a 
               href="#contact" 
-              class="inline-flex items-center justify-center rounded-lg bg-brand-accent px-5 py-2.5 text-sm font-semibold text-brand-bg hover:opacity-90 hover:-translate-y-[1px] transition-all duration-200 shadow-brand-md cursor-pointer"
+              class="inline-flex items-center justify-center rounded-lg bg-brand-accent px-5 py-2.5 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_15px_rgba(0,212,255,0.25)] hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
             >
               Get in Touch
             </a>
             <a 
               href="#projects" 
-              class="inline-flex items-center justify-center rounded-lg border border-brand-primary bg-brand-primary/20 px-5 py-2.5 text-sm font-semibold text-brand-text hover:bg-brand-primary/40 hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
+              class="inline-flex items-center justify-center rounded-lg border border-brand-secondary bg-brand-primary/40 px-5 py-2.5 text-sm font-semibold text-brand-text hover:bg-brand-primary hover:border-brand-accent/30 hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
             >
-              View Work
+              View Research
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Section -->
+  <section class="py-12 border-b border-brand-secondary/60 bg-brand-primary/20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="border border-brand-secondary/80 bg-brand-primary/50 rounded-xl p-5 text-center transition-all duration-200 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
+          <div class="text-[10px] font-mono tracking-wider text-brand-accent mb-2 uppercase">Academic Performance</div>
+          <div class="text-3xl font-display font-extrabold text-brand-text mb-1">3.44</div>
+          <div class="text-[11px] text-brand-muted font-medium font-sans">Cumulative GPA (ITK)</div>
+        </div>
+        <!-- Card 2 -->
+        <div class="border border-brand-secondary/80 bg-brand-primary/50 rounded-xl p-5 text-center transition-all duration-200 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
+          <div class="text-[10px] font-mono tracking-wider text-brand-accent mb-2 uppercase">Computational ML</div>
+          <div class="text-3xl font-display font-extrabold text-brand-text mb-1">20+</div>
+          <div class="text-[11px] text-brand-muted font-medium font-sans">Machine Learning Projects</div>
+        </div>
+        <!-- Card 3 -->
+        <div class="border border-brand-secondary/80 bg-brand-primary/50 rounded-xl p-5 text-center transition-all duration-200 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
+          <div class="text-[10px] font-mono tracking-wider text-brand-accent mb-2 uppercase">Systematic Dev</div>
+          <div class="text-3xl font-display font-extrabold text-brand-text mb-1">15+</div>
+          <div class="text-[11px] text-brand-muted font-medium font-sans">Algorithmic Trading Systems</div>
+        </div>
+        <!-- Card 4 -->
+        <div class="border border-brand-secondary/80 bg-brand-primary/50 rounded-xl p-5 text-center transition-all duration-200 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
+          <div class="text-[10px] font-mono tracking-wider text-brand-accent mb-2 uppercase">Domain Tenure</div>
+          <div class="text-3xl font-display font-extrabold text-brand-text mb-1">3+</div>
+          <div class="text-[11px] text-brand-muted font-medium font-sans">Years Active Experience</div>
         </div>
       </div>
     </div>
