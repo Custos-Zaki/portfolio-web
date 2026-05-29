@@ -117,33 +117,58 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-/* Ambient glow breathing and drifting keyframes */
-@keyframes glow-drift-pulse-left {
+/* Aurora Morphing Keyframe Animations */
+@keyframes aurora-morph-1 {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
-    opacity: 0.8;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+  33% {
+    border-radius: 70% 30% 52% 48% / 30% 65% 35% 70%;
+    transform: rotate(60deg) scale(1.1);
+  }
+  66% {
+    border-radius: 50% 50% 30% 70% / 55% 35% 65% 45%;
+    transform: rotate(-45deg) scale(0.95);
+  }
+}
+
+@keyframes aurora-morph-2 {
+  0%, 100% {
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: translate(45px, 25px) scale(1.15);
-    opacity: 1;
+    border-radius: 35% 65% 60% 40% / 60% 35% 65% 40%;
+    transform: rotate(-60deg) scale(1.15);
   }
 }
 
-@keyframes glow-drift-pulse-right {
+@keyframes aurora-morph-3 {
   0%, 100% {
-    transform: translate(0px, 0px) scale(1);
-    opacity: 0.7;
+    border-radius: 60% 40% 60% 40% / 45% 55% 45% 55%;
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: translate(-45px, -25px) scale(1.12);
-    opacity: 0.95;
+    border-radius: 45% 55% 40% 60% / 55% 45% 65% 35%;
+    transform: rotate(40deg) scale(1.08);
   }
 }
 
-.animate-glow-left {
-  animation: glow-drift-pulse-left 14s ease-in-out infinite;
+.animate-aurora-1 {
+  animation: aurora-morph-1 20s ease-in-out infinite;
 }
 
-.animate-glow-right {
-  animation: glow-drift-pulse-right 17s ease-in-out infinite;
+.animate-aurora-2 {
+  animation: aurora-morph-2 25s ease-in-out infinite;
+}
+
+.animate-aurora-3 {
+  animation: aurora-morph-3 28s ease-in-out infinite;
+}
+
+/* Grain Overlay (Fractal Noise) */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
