@@ -1,0 +1,68 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, date, tags, coverImage, category } = project.data;
+const baseUrl = import.meta.env.BASE_URL;
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+});
+---
+
+<a 
+  href={`${baseUrl}projects/${project.id}/`} 
+  class="group block relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/40 p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/50 hover:bg-brand-primary/60 hover:shadow-brand-lg cursor-pointer"
+>
+  <!-- Hover glow effect -->
+  <div class="absolute -inset-px rounded-xl bg-gradient-to-r from-brand-accent/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+
+  <div class="relative z-10 flex flex-col h-full justify-between">
+    <div>
+      <!-- Cover Image Wrapper -->
+      <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-bg/50 mb-4 border border-brand-primary/50">
+        <img 
+          src={`${baseUrl}images/${coverImage}`} 
+          alt={`${title} Cover`}
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        <span class="absolute top-2 left-2 rounded-full bg-brand-bg/90 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20">
+          {category}
+        </span>
+      </div>
+
+      <!-- Date and Meta -->
+      <div class="flex items-center gap-2 text-xs text-brand-muted mb-2 font-medium">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        <span>•</span>
+        <span>{project.data.visualizations.length} Visuals</span>
+      </div>
+
+      <!-- Title -->
+      <h3 class="font-display text-xl font-bold tracking-tight text-brand-text group-hover:text-brand-accent transition-colors duration-250 mb-2">
+        {title}
+      </h3>
+
+      <!-- Description -->
+      <p class="text-sm text-brand-muted line-clamp-3 mb-4 leading-relaxed font-sans">
+        {description}
+      </p>
+    </div>
+
+    <!-- Tags footer -->
+    <div class="flex flex-wrap gap-1.5 mt-auto pt-2">
+      {tags.map((tag) => (
+        <span class="rounded bg-brand-secondary/40 px-2 py-0.5 text-xs text-brand-muted border border-brand-secondary/30 transition-colors duration-200 group-hover:border-brand-accent/10">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</a>

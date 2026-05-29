@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-display: "Archivo", sans-serif;
+  --font-sans: "Space Grotesk", sans-serif;
+
+  --color-brand-bg: #0F172A;       /* Slate 900 */
+  --color-brand-primary: #1E293B;  /* Slate 800 */
+  --color-brand-secondary: #334155;/* Slate 700 */
+  --color-brand-accent: #22C55E;   /* Green 500 */
+  --color-brand-text: #F8FAFC;     /* Slate 50 */
+  --color-brand-muted: #94A3B8;    /* Slate 400 */
+
+  --shadow-brand-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-brand-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-brand-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-brand-xl: 0 20px 25px rgba(0,0,0,0.15);
+
+  --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Global resets and body styling */
+html, body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Custom scrollbar for data-focused theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-secondary);
+}

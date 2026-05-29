@@ -1,0 +1,59 @@
+---
+const skills = [
+  {
+    name: "Statistics & Modeling",
+    level: "Advanced",
+    description: "Hypothesis testing, regression analysis, non-parametric correlation, multivariate distribution modeling.",
+    techs: ["R", "Python", "Probabilistic Modeling"]
+  },
+  {
+    name: "Machine Learning",
+    level: "Intermediate/Advanced",
+    description: "Supervised & unsupervised learning, PCA dimensionality reduction, K-Means clustering, Random Forest modeling.",
+    techs: ["Scikit-Learn", "TensorFlow", "Pandas"]
+  },
+  {
+    name: "Quantitative Finance",
+    level: "Advanced",
+    description: "Algorithmic trading systems, Expert Advisor (EA) development, ML pipeline integration in financial markets.",
+    techs: ["MQL5", "Time Series Analysis", "Backtesting"]
+  },
+  {
+    name: "Database Systems",
+    level: "Advanced",
+    description: "Relational database schema engineering, complex analytical querying, data aggregation and cleaning.",
+    techs: ["SQL", "PostgreSQL", "SQLite"]
+  },
+  {
+    name: "Modern Frontend Stack",
+    level: "Intermediate",
+    description: "High-performance static site generators, utility-first CSS styling, and responsive UI design systems.",
+    techs: ["Astro", "Tailwind CSS", "HTML/JS"]
+  }
+];
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {skills.map((skill) => (
+    <div class="relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/20 p-6 shadow-brand-sm transition-all duration-300 hover:border-brand-accent/30 hover:bg-brand-primary/30">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-display text-lg font-bold text-brand-text">
+          {skill.name}
+        </h4>
+        <span class="inline-flex items-center rounded-full bg-brand-accent/10 px-2 py-0.5 text-[10px] font-medium text-brand-accent border border-brand-accent/20">
+          {skill.level}
+        </span>
+      </div>
+      <p class="text-xs text-brand-muted leading-relaxed mb-4 min-h-[48px] font-sans">
+        {skill.description}
+      </p>
+      <div class="flex flex-wrap gap-1">
+        {skill.techs.map((tech) => (
+          <span class="text-[10px] font-mono text-brand-text bg-brand-secondary/35 px-2 py-0.5 rounded border border-brand-secondary/30">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
