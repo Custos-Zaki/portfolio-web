@@ -116,3 +116,34 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
   overflow: hidden;
 }
+
+/* Ambient glow breathing and drifting keyframes */
+@keyframes glow-drift-pulse-left {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(45px, 25px) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-drift-pulse-right {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-45px, -25px) scale(1.12);
+    opacity: 0.95;
+  }
+}
+
+.animate-glow-left {
+  animation: glow-drift-pulse-left 14s ease-in-out infinite;
+}
+
+.animate-glow-right {
+  animation: glow-drift-pulse-right 17s ease-in-out infinite;
+}
