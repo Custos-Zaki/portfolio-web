@@ -44,11 +44,14 @@
 }
 
 /* Global resets and body styling */
-html, body {
+html {
   background-color: var(--color-brand-bg);
+  scroll-behavior: smooth;
+}
+
+body {
   color: var(--color-brand-text);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
