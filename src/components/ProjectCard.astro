@@ -38,7 +38,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
         <div class="absolute top-1.5 right-1.5 h-2.5 w-2.5 border-t-2 border-r-2 border-brand-accent/30"></div>
         <div class="absolute bottom-1.5 left-1.5 h-2.5 w-2.5 border-b-2 border-l-2 border-brand-accent/30"></div>
         
-        <span class="absolute top-2.5 left-2.5 rounded bg-brand-bg/95 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-brand-accent border border-brand-accent/20">
+        <span class="absolute top-2.5 left-2.5 rounded bg-gradient-to-r from-brand-accent/15 to-brand-violet/15 backdrop-blur-md px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-brand-accent border border-brand-accent/20">
           {category}
         </span>
       </div>
@@ -55,7 +55,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       </div>
 
       <!-- Title -->
-      <h3 class="font-display text-lg font-bold tracking-tight text-brand-text group-hover:text-brand-accent transition-colors duration-200 mb-2">
+      <h3 class="font-display text-lg font-bold tracking-tight text-brand-text group-hover:bg-gradient-to-r group-hover:from-brand-accent group-hover:to-brand-violet group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200 mb-2">
         {title}
       </h3>
 

@@ -54,10 +54,10 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
       <!-- Project Header -->
       <header class="border-b border-brand-primary pb-8 mb-10">
-        <div class="inline-flex items-center rounded bg-brand-accent/10 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20 mb-4">
+        <div class="inline-flex items-center rounded bg-gradient-to-r from-brand-accent/15 to-brand-violet/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20 mb-4">
           {category}
         </div>
-        <h1 class="font-display text-3xl font-extrabold tracking-tight text-brand-text sm:text-4xl md:text-5xl leading-tight">
+        <h1 class="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-brand-text via-brand-text to-brand-accent bg-clip-text text-transparent sm:text-4xl md:text-5xl leading-tight pb-1">
           {title}
         </h1>
         
@@ -103,7 +103,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       <section class="mt-12">
         <div class="mb-8">
           <h2 class="font-display text-2xl font-extrabold tracking-tight text-brand-text sm:text-3xl">
-            <span class="text-brand-accent">#</span> Data Visualizations Gallery
+            <span class="bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent font-extrabold">#</span> Data Visualizations Gallery
           </h2>
           <p class="mt-1 text-sm text-brand-muted">
             Strict statistical diagrams, charts, and analysis plots generated for this project.
@@ -123,7 +123,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
               </div>
               <div class="border-t border-brand-primary/40 pt-4 flex flex-col sm:flex-row gap-4 items-start justify-between">
                 <div class="max-w-3xl">
-                  <h3 class="font-display text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors duration-200">
+                  <h3 class="font-display text-lg font-bold text-brand-text group-hover:bg-gradient-to-r group-hover:from-brand-accent group-hover:to-brand-violet group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200">
                     <span class="text-brand-accent/60 mr-1.5 font-mono">Fig {index + 1}.</span> {visual.title}
                   </h3>
                   <p class="text-xs text-brand-muted mt-1 leading-relaxed font-sans">
@@ -145,7 +145,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
       <footer class="mt-16 border-t border-brand-primary pt-8 flex justify-center">
         <a 
           href={`${cleanBase}#projects`} 
-          class="inline-flex items-center justify-center rounded-lg bg-brand-accent px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:-translate-y-[1px] transition-all duration-200 shadow-brand-md cursor-pointer"
+          class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
         >
           Return to Projects Grid
         </a>
