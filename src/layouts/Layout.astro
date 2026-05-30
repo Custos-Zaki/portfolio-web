@@ -41,28 +41,19 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
     <meta property="twitter:description" content={description} />
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-brand-bg relative overflow-x-hidden">
-    <!-- Animated & Scroll-Responsive Aurora Background -->
+    <!-- Animated Aurora Background -->
     <div class="fixed inset-0 -z-30 overflow-hidden bg-brand-bg pointer-events-none select-none">
-      <!-- Grain Texture Layer -->
-      <div class="absolute inset-0 z-10 grain-overlay opacity-[0.25] pointer-events-none"></div>
-      
       <!-- Cyber Grid Overlay -->
       <div class="absolute inset-0 z-0 cyber-grid opacity-[0.7] pointer-events-none"></div>
 
       <!-- Aurora Glow Layer 1 (Cyan - Top Left) -->
-      <div id="aurora-1" class="absolute top-[-15%] left-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] pointer-events-none select-none will-change-transform">
-        <div class="w-full h-full rounded-full bg-brand-accent/10 blur-[130px] mix-blend-screen animate-aurora-1"></div>
-      </div>
+      <div class="absolute top-[-15%] left-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-brand-accent/6 blur-[120px] pointer-events-none select-none animate-aurora-1"></div>
 
       <!-- Aurora Glow Layer 2 (Violet - Bottom Right) -->
-      <div id="aurora-2" class="absolute bottom-[-15%] right-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] pointer-events-none select-none will-change-transform">
-        <div class="w-full h-full rounded-full bg-brand-violet/8 blur-[130px] mix-blend-screen animate-aurora-2"></div>
-      </div>
+      <div class="absolute bottom-[-15%] right-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-brand-violet/5 blur-[120px] pointer-events-none select-none animate-aurora-2"></div>
 
       <!-- Aurora Glow Layer 3 (Soft Cyan/Violet mix - Center/Right) -->
-      <div id="aurora-3" class="absolute top-[20%] right-[-10%] w-[55vw] h-[55vw] max-w-[800px] max-h-[800px] pointer-events-none select-none will-change-transform">
-        <div class="w-full h-full rounded-full bg-gradient-to-br from-brand-accent/6 to-brand-violet/6 blur-[120px] mix-blend-screen animate-aurora-3"></div>
-      </div>
+      <div class="absolute top-[20%] right-[-10%] w-[55vw] h-[55vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-br from-brand-accent/4 to-brand-violet/4 blur-[110px] pointer-events-none select-none animate-aurora-3"></div>
     </div>
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 w-full border-b border-brand-primary bg-brand-bg/85 backdrop-blur-md transition-all duration-300">
@@ -147,29 +138,5 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
         </div>
       </div>
     </footer>
-    <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        const aurora1 = document.getElementById('aurora-1');
-        const aurora2 = document.getElementById('aurora-2');
-        const aurora3 = document.getElementById('aurora-3');
-        let ticking = false;
-
-        if (aurora1 && aurora2 && aurora3) {
-          window.addEventListener('scroll', () => {
-            if (!ticking) {
-              window.requestAnimationFrame(() => {
-                const scrolled = window.scrollY;
-                // Layered parallax translations
-                aurora1.style.transform = `translate(${scrolled * 0.08}px, ${scrolled * 0.06}px)`;
-                aurora2.style.transform = `translate(${scrolled * -0.08}px, ${scrolled * -0.06}px)`;
-                aurora3.style.transform = `translate(${scrolled * -0.04}px, ${scrolled * 0.04}px)`;
-                ticking = false;
-              });
-              ticking = true;
-            }
-          });
-        }
-      });
-    </script>
   </body>
 </html>
