@@ -1,6 +1,6 @@
 ---
-title: "Algorithmic Trading Post-Mortem: Mengapa Model XGBoost HFT Mengalami Kerugian di MetaTrader 5"
-description: "Analisis Post-Mortem migrasi strategi kuantitatif HFT instrumen Emas (XAUUSD) dari Python ke MetaTrader 5, mendeteksi target leakage akibat Fractional Differencing dan timezone mismatch."
+title: "Algorithmic Trading Post-Mortem: Why an HFT XGBoost Model Incurred Losses in MetaTrader 5"
+description: "A post-mortem analysis of migrating a quantitative Gold (XAUUSD) HFT strategy from Python to MetaTrader 5, exposing target leakage caused by Fractional Differencing and timezone mismatch."
 date: 2026-06-04
 tags: ["Quantitative Finance", "Machine Learning", "XGBoost", "MQL5", "Time Series"]
 coverImage: "hft-dif-m5-xgboost/00_equity_curve.png"
@@ -8,80 +8,80 @@ category: "Quantitative Finance"
 visualizations:
   - filename: "hft-dif-m5-xgboost/00_equity_curve.png"
     title: "Equity Curve MT5 Live Simulation"
-    description: "Performa drawdown strategi sebelum perbaikan dilakukan, menunjukkan gap besar antara backtest riset dengan realitas eksekusi live."
+    description: "Drawdown performance of the strategy before corrections, highlighting the large gap between research backtests and real-world live execution."
   - filename: "hft-dif-m5-xgboost/01_fractional_diff_scan.png"
     title: "Fractional Differencing Scan"
-    description: "Uji ADF Statistic & p-value untuk mencari nilai d terkecil yang stasioner (d = 0.3 terpilih untuk mempertahankan memori tren harga)."
+    description: "ADF Statistic & p-value tests to find the minimum stationary value of d (d = 0.3 selected to preserve long-term price memory)."
   - filename: "hft-dif-m5-xgboost/02_target_class_distribution.png"
     title: "Target Class Distribution"
-    description: "Distribusi imbalance momentum target naik dan turun berbasis rolling quantile."
+    description: "Imbalanced class distribution for upward and downward price momentum based on rolling quantiles."
   - filename: "hft-dif-m5-xgboost/03_mutual_information_heatmap.png"
     title: "Mutual Information Heatmap"
-    description: "Menguji korelasi non-linear fitur input (volume dan volatilitas) terhadap target pergerakan harga."
+    description: "Testing non-linear correlations of input features (volume and volatility) against the price movement target."
   - filename: "hft-dif-m5-xgboost/04_spearman_correlation_atlas.png"
     title: "Spearman Correlation Atlas"
-    description: "Kekuatan korelasi linearitas fitur volume terhadap target return pasar."
+    description: "Linear correlation strengths of volume-based features against the market return target."
   - filename: "hft-dif-m5-xgboost/05_predictive_horizon_scan.png"
     title: "Predictive Horizon Scan"
-    description: "Scan parameter horizon prediksi masa depan untuk menemukan bar momentum terbaik."
+    description: "Scanning future prediction horizon parameters to find the optimal momentum bar."
   - filename: "hft-dif-m5-xgboost/06_feature_importance_comparison.png"
     title: "Feature Importance Comparison"
-    description: "Perbandingan kontribusi signifikansi fitur teknikal komparatif."
+    description: "Comparative technical features contribution significance ranking."
   - filename: "hft-dif-m5-xgboost/07_consensus_ranking_heatmap.png"
     title: "Consensus Ranking Heatmap"
-    description: "Konsensus fitur terbaik dari berbagai metode pembobotan untuk menekan bias overfitting."
+    description: "Feature consensus ranking from multiple feature selection methods to mitigate overfitting bias."
   - filename: "hft-dif-m5-xgboost/08_optuna_optimization_history.png"
     title: "Optuna Optimization History"
-    description: "Bayesian Optimization pada pencarian parameter XGBoost Classifier untuk meminimalkan log-loss."
+    description: "Bayesian optimization history of XGBoost Classifier parameters minimizing log-loss."
   - filename: "hft-dif-m5-xgboost/09_out_of_sample_roc_curve.png"
     title: "Out-of-Sample ROC Curve"
-    description: "Akurasi metrik model (ROC-AUC = 0.7810) sebelum perbaikan kebocoran target terdeteksi."
+    description: "Out-of-sample model metrics (ROC-AUC = 0.7810) before target leakage was identified."
   - filename: "hft-dif-m5-xgboost/10_confusion_matrix.png"
     title: "Out-of-Sample Confusion Matrix"
-    description: "Matriks klasifikasi arah momentum naik dan turun out-of-sample (~72.5% akurasi riset)."
+    description: "Classification matrix for upward and downward momentum directions out-of-sample (~72.5% research accuracy)."
   - filename: "hft-dif-m5-xgboost/12_shap_feature_beeswarm.png"
     title: "SHAP Feature Beeswarm Plot"
-    description: "Explainable AI (XAI) memetakan pengaruh volume fraksional (F2/F3) sebagai kontributor keputusan model terbesar."
+    description: "Explainable AI (XAI) mapping fractional volume (F2/F3) as the largest contributor to model decisions."
   - filename: "hft-dif-m5-xgboost/11_probability_threshold_calibration.png"
     title: "Probability Threshold Calibration"
-    description: "Diagram kalibrasi keandalan probabilitas model setelah rekayasa ulang untuk menyaring kebisingan pasar (market noise)."
+    description: "Probability calibration curves after system redesign to filter out market noise."
 ---
 
-## 1. Desain Sistem & Konteks Timeframe (M1 vs. M5)
+## 1. System Design & Timeframe Context (M1 vs. M5)
 
-Strategi ini beroperasi pada timeframe 5 menit (M5) untuk mengantisipasi masalah biaya transaksi (spread) yang sering menghabiskan keunggulan prediktif pada timeframe 1 menit (M1).
+This strategy operates on the 5-minute (M5) timeframe to mitigate transaction costs (spreads) that frequently erode predictive edges on the 1-minute (M1) timeframe.
 
-*   **Masalah Over-head Transaksi di M1:** Target pergerakan harga 1 menit berkisar **3 s.d. 8 pip**. Sementara spread rata-rata XAUUSD berkisar **1.5 s.d. 3 pip**. Biaya transaksi memakan **30% s.d. 50%** keuntungan kotor.
-*   **Keuntungan Timeframe M5:** Dengan target pergerakan 3-bar M5 (15 menit) sebesar **15 s.d. 25 pip**, spread hanya menyumbang **6% s.d. 15%** biaya transaksi, sehingga secara teori keunggulan statistik model dapat dimonetisasi.
-
----
-
-## 2. Feature Engineering & Uji Stasioneritas (Fractional Differencing)
-
-Untuk menghindari regresi semu (spurious regression) tanpa membuang informasi jangka panjang (tren historis), digunakan metode **Fractional Differencing (Hosking, 1981)**.
-
-Dilakukan scan nilai $d$ dari 0.10 hingga 0.90 dengan uji Augmented Dickey-Fuller (ADF) untuk mencari nilai differencing terkecil yang stasioner (p-value < 0.05).
-
-*(Hasil visualisasi stasioneritas dapat dilihat pada Gambar 2 di Galeri Visualisasi di bawah)*
-
-### Struktur Fitur (8 Fitur Input)
-1.  **F1 (FracDiff Mid-Price):** Tren stasioner harga dengan $d=0.3$.
-2.  **F2 & F3 (FracDiff Buy/Sell Volume Proxies):** Aliran volume beli/jual yang distasionerkan.
-3.  **F4 (OFI Z-Score):** Imbalance aliran order dengan rolling Z-score 30 bar.
-4.  **F5 (HAR-RV Volatility Forecast):** Komposit volatilitas multiskala (10, 30, 60 bar M5).
-5.  **F6 (Time-of-Day Encoding):** Siklus jam pasar menggunakan representasi sin/cos.
-6.  **F7 (Normalized Volatility):** Rasio volatilitas jangka pendek terhadap jangka panjang.
-7.  **F8 (Rolling Autocorrelation lag-1):** Detektor perubahan mikrostruktur pasar.
+*   **Transaction Overhead on M1:** The 1-minute target price movement ranges from **3 to 8 pips**. Meanwhile, the average XAUUSD spread ranges from **1.5 to 3 pips**. Consequently, transaction fees eat up **30% to 50%** of gross profits.
+*   **Advantage of the M5 Timeframe:** With a 3-bar M5 target horizon (15 minutes) yielding movements of **15 to 25 pips**, the spread only accounts for **6% to 15%** of transaction costs. In theory, this allows the model's statistical edge to be successfully monetized.
 
 ---
 
-## 3. Kesalahan Fatal: Desain Label Target (The Target Leakage)
+## 2. Feature Engineering & Stationarity Testing (Fractional Differencing)
 
-Untuk menghindari bias masa depan, pembuatan label target menggunakan metode biner berbasis *rolling quantile* (top/bottom 30% dari forward return 1 bar ke depan). Namun, di sinilah letak bug utama yang menyebabkan kegagalan sistem ketika dijalankan di MT5:
+To prevent spurious regression without discarding long-term memory (historical trends), we employ **Fractional Differencing (Hosking, 1981)**.
+
+A grid search scan of $d$ values from 0.10 to 0.90 was conducted alongside Augmented Dickey-Fuller (ADF) tests to find the minimum differencing parameter that achieves stationarity ($p\text{-value} < 0.05$).
+
+*(The stationarity visualization scan can be viewed in Figure 2 of the Data Visualizations Gallery below)*
+
+### Feature Structure (8 Input Features)
+1.  **F1 (FracDiff Mid-Price):** Stationarized price trend with $d=0.3$.
+2.  **F2 & F3 (FracDiff Buy/Sell Volume Proxies):** Stationarized buy and sell volume flow proxies.
+3.  **F4 (OFI Z-Score):** Order Flow Imbalance (OFI) Z-score with a 30-bar rolling window.
+4.  **F5 (HAR-RV Volatility Forecast):** Heterogeneous Autoregressive Realized Volatility (HAR-RV) multi-scale composite forecast (10, 30, 60 M5 bars).
+5.  **F6 (Time-of-Day Encoding):** Time-of-day cycle represented via sine and cosine encodings.
+6.  **F7 (Normalized Volatility):** Ratio of short-term volatility to long-term volatility.
+7.  **F8 (Rolling Autocorrelation lag-1):** Lag-1 rolling autocorrelation to detect microstructural shifts.
+
+---
+
+## 3. Fatal Flaw: Target Label Design (The Target Leakage)
+
+To prevent look-ahead bias, target labels were initially constructed as binary outcomes based on rolling quantiles (top/bottom 30% of the 1-bar forward return). However, this is where the critical bug occurred, causing the system to fail in MetaTrader 5 live simulation:
 
 > [!CAUTION]
-> **BUG STRUKTURAL (Label-Instrument Mismatch):**  
-> Label target ($Y$) dihitung menggunakan return dari **harga hasil Fractional Differencing (F1)**, *bukan* dari harga transaksi riil (Close Price asli).
+> **STRUCTURAL BUG (Label-Instrument Mismatch):**  
+> The target label ($Y$) was calculated using the returns of the **Fractionally Differenced price (F1)**, *not* the actual physical transaction price (the raw Close Price).
 > ```python
 > F1_vals = df["F1_FracDiff_MidPrice"].values.astype(np.float64)
 > fwd_ret[:-HORIZON] = F1_vals[HORIZON:] - F1_vals[:-HORIZON]
@@ -90,68 +90,68 @@ Untuk menghindari bias masa depan, pembuatan label target menggunakan metode bin
 
 ---
 
-## 4. Signal Diagnostics (Metrik Sinyal Kuantitatif)
+## 4. Signal Diagnostics (Quantitative Signal Metrics)
 
-Karena target ($Y$) yang diprediksi adalah arah pergerakan harga stasioner (`F1_FracDiff_MidPrice`) yang memiliki autokorelasi kuat, model menunjukkan kekuatan prediktif fiktif yang sangat tinggi selama fase diagnostik sinyal.
+Because the target ($Y$) predicted was the direction of the stationary price (`F1_FracDiff_MidPrice`), which retains strong autocorrelation, the model demonstrated a highly inflated, fictitious predictive power during the signal diagnostic phase.
 
-*(Silakan periksa Gambar 4, 5, dan 8 pada galeri di bawah untuk memverifikasi signifikansi linear dan kepentingan fitur)*
+*(Please check Figures 4, 5, and 8 in the gallery below to verify the linear significance and feature importance rankings)*
 
 ---
 
-## 5. Pelatihan Model & Optimasi Hiperparameter (XGBoost & Optuna)
+## 5. Model Training & Hyperparameter Optimization (XGBoost & Optuna)
 
-Model dilatih menggunakan **XGBoost Classifier** dengan 4-Fold Purged Walk-Forward Cross Validation. Untuk mencari arsitektur model terbaik tanpa mengalami overfitting, digunakan optimasi hiperparameter berbasis Bayesian Optimization lewat **Optuna**.
+The model was trained using an **XGBoost Classifier** combined with a 4-Fold Purged Walk-Forward Cross Validation scheme. To find the optimal hyperparameters and control overfitting, Bayesian Optimization was executed via **Optuna**.
 
-*(Riwayat optimasi dapat diverifikasi pada Gambar 9 di bawah)*
+*(The optimization history is displayed in Figure 9 below)*
 
-Hasil evaluasi pada data out-of-sample (tersegel) memberikan metrik riset yang luar biasa sebelum debugging dilakukan:
+Out-of-sample (unseen) test set evaluation yielded stellar research metrics prior to debugging:
 
-*   **OOS ROC-AUC:** **0.7810** (Nilai yang sangat tinggi untuk trading frekuensi tinggi)
+*   **OOS ROC-AUC:** **0.7810** (Extremely high for live trading)
 *   **OOS Macro F1-Score:** **0.7254**
 
-*(Gambar 10 dan 11 menunjukkan visual kurva ROC dan Confusion Matrix hasil pelatihan tersebut)*
+*(Figures 10 and 11 visualize the corresponding ROC curve and Confusion Matrix results)*
 
 ---
 
-## 6. Penjelasan Keputusan Model (Explainable AI - SHAP)
+## 6. Model Decision Interpretability (Explainable AI - SHAP)
 
-Untuk memverifikasi logika pengambilan keputusan XGBoost secara matematis, kami mengekstrak nilai SHAP (SHapley Additive exPlanations). Ini memastikan model tidak mengambil keputusan berdasarkan bias noise.
+To mathematically audit the XGBoost decision-making process, we extracted SHAP (SHapley Additive exPlanations) values, verifying that the model relied on stable structural features rather than noise artifacts.
 
-*(Visual sebaran kontribusi fitur dapat ditinjau pada Gambar 12 di bawah)*
-
----
-
-## 7. Benturan Realitas & Diagnosis Debugging
-
-Ketika model dengan akurasi 78% ini diuji di live trading MT5, hasil eksekusi riil sangat bertolak belakang dengan hasil backtest ideal di Python. Setelah audit kode dilakukan, ditemukan beberapa penyebab utama kegagalan tersebut:
-
-### A. Konsekuensi Matematis Label-Instrument Mismatch
-Model XGBoost berhasil menebak ke mana arah harga stasioner *FracDiff* ($d=0.3$) akan bergerak dengan akurasi tinggi. Namun, karena Fractional Differencing membuang tren jangka panjang demi mencapai stasioneritas, pergerakan naik pada FracDiff sering kali bertepatan dengan harga riil yang sebenarnya sedang turun atau bergerak flat. Akibatnya, robot trading melakukan pembelian (*Buy*) pada harga fisik saat model menerima sinyal naik dari representasi harga stasioner abstrak. Hal ini mengakibatkan akumulasi kerugian yang besar karena ketidaksesuaian instrumen transaksi.
-
-### B. Pergeseran Zona Waktu (TOD Timezone Shift)
-*   **Masalah:** Fitur waktu harian (TOD sin/cos) menggunakan menit-dalam-hari. Data latih Python menggunakan waktu UTC/GMT, sementara MetaTrader 5 berjalan pada waktu server broker (EET/GMT+2).
-*   **Dampak:** Pergeseran 2-3 jam membuat model salah membaca sesi perdagangan, mengira sesi London yang tenang sedang berlangsung ketika pasar live sebenarnya berada dalam sesi New York yang sangat volatil.
-
-### C. Densitas Volume Tick Broker
-*   **Masalah:** CFD Emas bersifat desentralisasi. Setiap broker MT5 menyuplai feed volume tick yang berbeda.
-*   **Dampak:** Model XGBoost yang dilatih pada batas absolut split volume (misal: `F2 > 1500`) akan gagal membaca sinyal saat berjalan pada broker yang memiliki kepadatan volume tick yang berbeda.
+*(The distribution of feature impacts can be reviewed in Figure 12 below)*
 
 ---
 
-## 8. Solusi Kuantitatif & Hasil Setelah Koreksi Target
+## 7. Reality Collision & Debugging Diagnosis
 
-Untuk mengatasi bug struktural ini, kami menerapkan **Protokol Perbaikan Kuantitatif**:
+When the model with a simulated 78% accuracy was deployed to MetaTrader 5 live simulation, actual results starkly contradicted the idealized backtests. A thorough code audit identified several key failure modes:
 
-1.  **Pemisahan Peran Stasioneritas:** Fitur Input ($X$) tetap menggunakan data stasioner (FracDiff d=0.3, OFI, HAR-RV) untuk analisis pola jangka pendek. Namun, Label Target ($Y$) wajib menggunakan return dari **Close Price fisik asli** (`Close[t+HORIZON] - Close[t]`).
-2.  **Kalibrasi Probabilitas:** Kami menambahkan lapisan kalibrasi probabilitas (Probability Calibration) untuk menyaring sinyal trading yang tidak pasti.
+### A. Mathematical Consequences of Label-Instrument Mismatch
+The XGBoost model successfully predicted the direction of the stationary fractionally differenced price ($d=0.3$) with high accuracy. However, because Fractional Differencing discards long-term drift to achieve stationarity, upward moves in the FracDiff series often coincided with physical prices that were actually falling or flat. Consequently, the trading robot executed a physical buy order while the model was merely reacting to an abstract stationary price rise. This discrepancy led to severe losses due to transaction-to-label mismatches.
 
-*(Gambar 13 menunjukkan kurva kalibrasi probabilitas keandalan sistem)*
+### B. Time-of-Day Timezone Shift (TOD Shift)
+*   **Problem:** The time-of-day cyclical features (TOD sin/cos) calculated the minute-of-day index. The Python training dataset operated on UTC/GMT, whereas MetaTrader 5 ran on the broker's server time (EET/GMT+2).
+*   **Impact:** A 2-to-3 hour shift caused the model to misinterpret active trading sessions—falsely identifying a calm London morning slot when live market execution was actually navigating a volatile New York session.
 
-### Evaluasi Realitas Finansial (The True Benchmark)
+### C. Broker Tick Volume Density
+*   **Problem:** Gold CFDs are decentralized. Each MT5 broker supplies its own distinct tick volume feed.
+*   **Impact:** An XGBoost model trained on absolute volume splits (e.g., `F2 > 1500`) failed to generalize when deployed on a broker with a completely different tick volume scale.
 
-Setelah melatih ulang model dengan target Close Price fisik riil, metrik performa menunjukkan realitas pasar yang sesungguhnya:
+---
 
-*   **OOS ROC-AUC Terkoreksi:** **0.5061** (Sangat dekat dengan *random walk* 0.50).
-*   **Perilaku Model:** Dengan model baru ini, sistem mengenali bahwa pasar pada timeframe M5 sangat acak (*efficient market hypothesis*). Model bertindak sebagai **Risk Gatekeeper** yang tangguh: alih-alih melakukan transaksi acak secara berlebihan yang akan merugi akibat spread, model secara pintar menyaring 99.8% data sebagai kebisingan (*noise*) dan membatasi transaksi hanya sebanyak 21 trade selama periode pengujian out-of-sample.
+## 8. Quantitative Remediation & Post-Correction Results
 
-Hal ini membuktikan keberhasilan rekayasa ulang: model berhasil diubah dari sistem yang "percaya diri secara keliru" (overconfident dan merugi akibat sinyal palsu) menjadi sistem protektif yang memahami keterbatasan informasinya sendiri di pasar yang efisien.
+To address these structural bugs, we implemented a **Quantitative Remediation Protocol**:
+
+1.  **Decoupled Stationarity Roles:** The Input Features ($X$) continue to use stationary representations (FracDiff d=0.3, OFI, HAR-RV) to analyze short-term patterns. However, the Target Label ($Y$) must be computed from raw, **physical Close Price returns** (`Close[t+HORIZON] - Close[t]`).
+2.  **Probability Calibration:** We introduced a probability calibration layer to filter out low-confidence signals and manage noise.
+
+*(Figure 13 showcases the post-calibration probability reliability curves)*
+
+### Financial Reality Evaluation (The True Benchmark)
+
+Retraining the model with the physical Close Price target revealed the true market reality:
+
+*   **Corrected OOS ROC-AUC:** **0.5061** (Extremely close to a random walk of 0.50).
+*   **Model Behavior:** Under the corrected target, the model confirms that the M5 market behaves highly efficiently (supporting the Efficient Market Hypothesis). Crucially, the model acts as a robust **Risk Gatekeeper**: instead of over-trading on noise and getting eaten by spreads, it filters out 99.8% of inputs as noise, executing only 21 high-conviction trades across the entire out-of-sample testing period.
+
+This demonstrates a successful engineering pivot: transforming an overconfident, loss-incurring system into a protective, risk-aware model that understands its own informational limits in a highly efficient market.

@@ -39,6 +39,9 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+
+    <!-- Math Equation Rendering (KaTeX) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-brand-bg relative overflow-x-hidden">
     <!-- Animated Aurora Background -->
