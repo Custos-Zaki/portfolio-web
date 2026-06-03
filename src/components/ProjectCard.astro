@@ -10,6 +10,8 @@ const { title, description, date, tags, coverImage, category } = project.data;
 const baseUrl = import.meta.env.BASE_URL;
 const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
 
+const cleanSlug = project.id.endsWith('/index') ? project.id.slice(0, -6) : project.id;
+
 // Format date
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
@@ -18,7 +20,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 ---
 
 <a 
-  href={`${cleanBase}projects/${project.id}/`} 
+  href={`${cleanBase}projects/${cleanSlug}/`} 
   class="group block relative overflow-hidden rounded-xl border border-brand-secondary/60 bg-brand-primary p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/30 hover:shadow-[0_0_20px_rgba(0,212,255,0.06)] cursor-pointer"
 >
   <!-- Cyber-grid ambient accent inside card -->

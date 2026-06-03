@@ -5,10 +5,13 @@ import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((project) => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+  return projects.map((project) => {
+    const slug = project.id.endsWith('/index') ? project.id.slice(0, -6) : project.id;
+    return {
+      params: { slug },
+      props: { project },
+    };
+  });
 }
 
 interface Props {
