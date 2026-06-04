@@ -169,3 +169,70 @@ h1, h2, h3, h4, h5, h6 {
 .animate-aurora-3 {
   animation: aurora-drift-3 25s ease-in-out infinite;
 }
+
+/* Custom GitHub-style alerts/callouts styled for dark/neon cyberpunk theme */
+.markdown-alert {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid transparent;
+  border-radius: 0.5rem;
+  background-color: rgba(11, 18, 32, 0.4); /* brand-primary with opacity */
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.markdown-alert p {
+  margin: 0;
+}
+
+.markdown-alert p + p {
+  margin-top: 0.5rem;
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* CAUTION / WARNING alert styling (Red/Orange theme) */
+.markdown-alert-caution, .markdown-alert-warning {
+  border-color: #EF4444; /* red-500 */
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.04);
+}
+.markdown-alert-caution .markdown-alert-title, .markdown-alert-warning .markdown-alert-title {
+  color: #EF4444;
+}
+
+/* NOTE alert styling (Blue/Cyan theme) */
+.markdown-alert-note {
+  border-color: var(--color-brand-accent);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.04);
+}
+.markdown-alert-note .markdown-alert-title {
+  color: var(--color-brand-accent);
+}
+
+/* TIP alert styling (Green/Emerald theme) */
+.markdown-alert-tip {
+  border-color: #10B981; /* emerald-500 */
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.04);
+}
+.markdown-alert-tip .markdown-alert-title {
+  color: #10B981;
+}
+
+/* IMPORTANT alert styling (Purple/Violet theme) */
+.markdown-alert-important {
+  border-color: var(--color-brand-violet);
+  box-shadow: 0 0 15px rgba(123, 97, 255, 0.04);
+}
+.markdown-alert-important .markdown-alert-title {
+  color: var(--color-brand-violet);
+}

@@ -26,3 +26,9 @@ pnpm-debug.log*
 # Agent files
 .agent/
 .gemini/
+
+# Local mentor review file (do not push)
+portfolio_text_content.md
+
+# Raw expert advisor code (local only)
+expert-advisor/
