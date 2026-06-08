@@ -137,7 +137,16 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
         </div>
         <hr class="my-6 border-brand-primary" />
         <div class="flex flex-col items-center justify-between gap-4 text-xs md:flex-row">
-          <p>© {new Date().getFullYear()} Muhammad Zaki Rifa'at. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Muhammad Zaki Rifa'at. All rights reserved.
+            <a 
+              href={`${cleanBase}archive/`} 
+              class="text-brand-muted/40 hover:text-brand-accent/50 transition-colors duration-200 ml-1 font-mono text-[10px] select-none"
+              title="System Archive"
+            >
+              &gt;
+            </a>
+          </p>
           <p>Built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-brand-text hover:text-brand-accent cursor-pointer">Astro</a> and <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" class="text-brand-text hover:text-brand-accent cursor-pointer">Tailwind CSS</a>.</p>
         </div>
       </div>

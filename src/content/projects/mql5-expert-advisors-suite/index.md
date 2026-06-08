@@ -5,6 +5,7 @@ date: 2026-06-04
 tags: ["MQL5", "Systematic Trading", "Expert Advisors", "MetaTrader 5", "Risk Management"]
 coverImage: "mql5-expert-advisors-suite/orb_propfirm.png"
 category: "Systematic Trading"
+archived: true
 visualizations:
   - filename: "mql5-expert-advisors-suite/orb_propfirm.png"
     title: "ORB for Prop Firm - 7-Month Backtest"

@@ -29,6 +29,7 @@ pnpm-debug.log*
 
 # Local mentor review file (do not push)
 portfolio_text_content.md
+portfolio_text_content_revised.md
 
 # Raw expert advisor code (local only)
 expert-advisor/

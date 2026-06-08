@@ -10,6 +10,7 @@ const projectsCollection = defineCollection({
     tags: z.array(z.string()),
     coverImage: z.string(),
     category: z.string(),
+    archived: z.boolean().default(false),
     visualizations: z.array(z.object({
       filename: z.string(),
       title: z.string(),
