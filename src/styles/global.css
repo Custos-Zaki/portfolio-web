@@ -6,13 +6,13 @@
   --font-display: "Space Grotesk", sans-serif;
   --font-sans: "Inter", sans-serif;
 
-  --color-brand-bg: #050816;       /* Deep Space Dark */
-  --color-brand-primary: #0B1220;  /* Surface */
-  --color-brand-secondary: #111827;/* Elevated Surface */
-  --color-brand-accent: #00D4FF;   /* Cyan Accent */
-  --color-brand-violet: #7B61FF;   /* Violet Accent */
-  --color-brand-text: #F8FAFC;     /* Slate 50 */
-  --color-brand-muted: #94A3B8;    /* Slate 400 */
+  --color-brand-bg: #0a1120;       /* Dark Navy Background */
+  --color-brand-primary: #121e36;  /* Card Surface */
+  --color-brand-secondary: #2C5EAD;/* Cobalt Blue / Borders */
+  --color-brand-accent: #C4E2F5;   /* Ice Blue Accent / Headings */
+  --color-brand-violet: #4BB8FA;   /* Sky Blue Accent */
+  --color-brand-text: #C4E2F5;     /* Ice Blue Text */
+  --color-brand-muted: #4BB8FA;    /* Sky Blue Muted Text */
 
   --shadow-brand-sm: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-brand-md: 0 4px 6px rgba(0,0,0,0.1);
@@ -83,17 +83,17 @@ h1, h2, h3, h4, h5, h6 {
 /* Futuristic background overlays */
 .cyber-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 212, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 212, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, rgba(75, 184, 250, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(75, 184, 250, 0.015) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 .glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 20px rgba(75, 184, 250, 0.15);
 }
 
 .glow-violet {
-  box-shadow: 0 0 20px rgba(123, 97, 255, 0.15);
+  box-shadow: 0 0 20px rgba(44, 94, 173, 0.15);
 }
 
 .hexagon-wrapper {
@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, var(--color-brand-accent), var(--color-brand-violet));
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   z-index: 0;
-  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgba(75, 184, 250, 0.3));
 }
 
 .hexagon-inner {
@@ -176,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem 1.25rem;
   border-left: 4px solid transparent;
   border-radius: 0.5rem;
-  background-color: rgba(11, 18, 32, 0.4); /* brand-primary with opacity */
+  background-color: rgba(18, 30, 54, 0.4); /* brand-primary with opacity */
   font-size: 0.875rem;
   line-height: 1.6;
 }
