@@ -57,8 +57,8 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
         </div>
 
         <!-- Bio Content -->
-        <div class="flex-grow animate-fade-in-up">
-          <div class="inline-flex items-center rounded bg-brand-accent/10 px-3 py-1 text-xs font-mono text-brand-accent border border-brand-accent/20 mb-4 justify-center sm:justify-start">
+        <div class="flex-grow animate-fade-in-up border border-brand-secondary/30 bg-brand-primary/50 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 text-left">
+          <div class="inline-flex items-center rounded bg-brand-accent/10 px-3 py-1 text-xs font-mono text-brand-accent border border-brand-accent/20 mb-4 justify-start">
             <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-brand-accent animate-pulse"></span> Available for Projects
           </div>
           <h1 class="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-brand-text via-brand-text to-brand-accent bg-clip-text text-transparent sm:text-4xl md:text-5xl leading-tight pb-1">
@@ -75,7 +75,7 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
           </p>
  
           <!-- Social Links / Buttons -->
-          <div class="mt-6 flex flex-wrap items-center justify-center sm:justify-start gap-4">
+          <div class="mt-6 flex flex-wrap items-center justify-start gap-4">
             <a 
               href="#contact" 
               class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-5 py-2.5 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
@@ -225,58 +225,62 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
   <!-- About / Value Proposition Section -->
   <section id="about" class="py-16 sm:py-24 border-b border-brand-primary/50">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-8 md:grid-cols-3 items-start">
-        <div class="md:col-span-1">
-          <h2 class="font-display text-2xl font-extrabold tracking-tight text-brand-text sm:text-3xl">
-            <span class="bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent font-extrabold">#</span> Value Proposition
-          </h2>
-          <p class="mt-2 text-sm text-brand-muted font-sans leading-relaxed">
-            How I approach data problems, project execution, and client collaborations.
-          </p>
-        </div>
-        <div class="md:col-span-2 space-y-6 text-sm text-brand-muted leading-relaxed font-sans">
-          <p>
-            My workflow starts with the business problem, not the algorithm. Before selecting a model, the question is: what decision does this output need to support, and what does failure actually cost?
-          </p>
-          <p>
-            This means every project begins with thorough data validation and exploratory analysis — checking distributions, hunting for leakage, and confirming that the data actually reflects the problem at hand. The model is built last, not first.
-          </p>
-          <p>
-            For clients, this means fewer surprises in production, cleaner handoffs, and honest communication about what the data can and cannot support. If the signal isn't there, I'll tell you before you pay for a model that won't hold up.
-          </p>
+      <div class="border border-brand-secondary/30 bg-brand-primary/50 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10">
+        <div class="grid gap-8 md:grid-cols-3 items-start">
+          <div class="md:col-span-1">
+            <h2 class="font-display text-2xl font-extrabold tracking-tight text-brand-text sm:text-3xl">
+              <span class="bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent font-extrabold">#</span> Value Proposition
+            </h2>
+            <p class="mt-2 text-sm text-brand-muted font-sans leading-relaxed">
+              How I approach data problems, project execution, and client collaborations.
+            </p>
+          </div>
+          <div class="md:col-span-2 space-y-6 text-sm text-brand-muted leading-relaxed font-sans">
+            <p>
+              My workflow starts with the business problem, not the algorithm. Before selecting a model, the question is: what decision does this output need to support, and what does failure actually cost?
+            </p>
+            <p>
+              This means every project begins with thorough data validation and exploratory analysis — checking distributions, hunting for leakage, and confirming that the data actually reflects the problem at hand. The model is built last, not first.
+            </p>
+            <p>
+              For clients, this means fewer surprises in production, cleaner handoffs, and honest communication about what the data can and cannot support. If the signal isn't there, I'll tell you before you pay for a model that won't hold up.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 sm:py-24 bg-brand-primary/10">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="font-display text-2xl font-extrabold tracking-tight bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent sm:text-3xl mb-4">
-        Let's Build Something Intelligent
-      </h2>
-      <p class="text-sm text-brand-muted max-w-xl mx-auto mb-8 font-sans leading-relaxed">
-        I am always open to collaborating on quantitative research projects, statistical modeling contracts, or algorithmic system design. Let's discuss your next data pipeline.
-      </p>
+  <section id="contact" class="py-16 sm:py-24 border-b border-brand-primary/50">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div class="border border-brand-secondary/30 bg-brand-primary/50 backdrop-blur-md rounded-2xl p-8 sm:p-12 text-center">
+        <h2 class="font-display text-2xl font-extrabold tracking-tight bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent sm:text-3xl mb-4">
+          Let's Build Something Intelligent
+        </h2>
+        <p class="text-sm text-brand-muted max-w-xl mx-auto mb-8 font-sans leading-relaxed">
+          I am always open to collaborating on quantitative research projects, statistical modeling contracts, or algorithmic system design. Let's discuss your next data pipeline.
+        </p>
 
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-        <a 
-          href="mailto:custos.quant@gmail.com" 
-          class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] transition-all duration-200 cursor-pointer hover:-translate-y-[1px]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          Email Me
-        </a>
-        <a 
-          href="https://www.linkedin.com/in/muhammad-zaki-rifaat/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="inline-flex items-center gap-2 rounded-lg border border-brand-primary bg-brand-bg px-6 py-3 text-sm font-semibold text-brand-text hover:bg-brand-primary/30 transition-all duration-200 cursor-pointer hover:-translate-y-[1px]"
-        >
-          Connect on LinkedIn
-        </a>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+          <a 
+            href="mailto:custos.quant@gmail.com" 
+            class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] transition-all duration-200 cursor-pointer hover:-translate-y-[1px]"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Email Me
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/muhammad-zaki-rifaat/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-2 rounded-lg border border-brand-primary bg-brand-bg px-6 py-3 text-sm font-semibold text-brand-text hover:bg-brand-primary/30 transition-all duration-200 cursor-pointer hover:-translate-y-[1px]"
+          >
+            Connect on LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   </section>

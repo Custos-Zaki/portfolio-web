@@ -34,126 +34,128 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 <Layout title={`${title} | custos.zaki`} description={description}>
   <article class="py-12 sm:py-16 md:py-20">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-      
-      <!-- Back Link / Breadcrumbs -->
-      <nav class="mb-8" aria-label="Breadcrumb">
-        <a 
-          href={`${cleanBase}#projects`} 
-          class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-muted hover:text-brand-accent transition-colors duration-200 cursor-pointer group"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            class="h-3.5 w-3.5 transform transition-transform duration-200 group-hover:-translate-x-0.5" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor" 
-            stroke-width="2.5"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Projects
-        </a>
-      </nav>
-
-      <!-- Project Header -->
-      <header class="border-b border-brand-primary pb-8 mb-10">
-        <div class="inline-flex items-center rounded bg-gradient-to-r from-brand-accent/15 to-brand-violet/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20 mb-4">
-          {category}
-        </div>
-        <h1 class="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-brand-text via-brand-text to-brand-accent bg-clip-text text-transparent sm:text-4xl md:text-5xl leading-tight pb-1">
-          {title}
-        </h1>
+      <div class="border border-brand-secondary/30 bg-brand-primary/50 backdrop-blur-md rounded-2xl p-6 sm:p-10 md:p-12">
         
-        <div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-brand-muted font-medium">
-          <div class="flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <!-- Back Link / Breadcrumbs -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+          <a 
+            href={`${cleanBase}#projects`} 
+            class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-muted hover:text-brand-accent transition-colors duration-200 cursor-pointer group"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="h-3.5 w-3.5 transform transition-transform duration-200 group-hover:-translate-x-0.5" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              stroke-width="2.5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-            <time datetime={date.toISOString()}>{formattedDate}</time>
+            Back to Projects
+          </a>
+        </nav>
+
+        <!-- Project Header -->
+        <header class="border-b border-brand-primary/55 pb-8 mb-10">
+          <div class="inline-flex items-center rounded bg-gradient-to-r from-brand-accent/15 to-brand-violet/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-brand-accent border border-brand-accent/20 mb-4">
+            {category}
           </div>
-          <span>•</span>
-          <div class="flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <span>{visualizations.length} Visualizations</span>
-          </div>
-        </div>
-
-        <p class="mt-6 text-base sm:text-lg text-brand-text/90 italic font-sans leading-relaxed border-l-2 border-brand-accent pl-4 bg-brand-primary/10 py-3 rounded-r-lg">
-          {description}
-        </p>
-
-        <!-- Tags List -->
-        <div class="flex flex-wrap gap-2 mt-6">
-          {tags.map((tag) => (
-            <span class="rounded bg-brand-primary/80 border border-brand-primary px-3 py-1 text-xs text-brand-text font-medium">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </header>
-
-      <!-- Markdown Core Explanation (Prose class) -->
-      <section class="prose prose-invert prose-cyan max-w-none font-sans leading-relaxed prose-headings:font-display prose-headings:font-extrabold prose-a:text-brand-accent prose-strong:text-brand-text prose-code:text-brand-accent">
-        <Content />
-      </section>
-
-      <!-- Separator -->
-      <hr class="my-16 border-brand-primary" />
-
-      <!-- Data Visualizations Gallery -->
-      <section class="mt-12">
-        <div class="mb-8">
-          <h2 class="font-display text-2xl font-extrabold tracking-tight text-brand-text sm:text-3xl">
-            <span class="bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent font-extrabold">#</span> Data Visualizations Gallery
-          </h2>
-          <p class="mt-1 text-sm text-brand-muted">
-            Strict statistical diagrams, charts, and analysis plots generated for this project.
-          </p>
-        </div>
-
-        <div class="space-y-12">
-          {visualizations.map((visual, index) => (
-            <div class="group relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/20 p-5 shadow-brand-md transition-all duration-300 hover:border-brand-accent/20">
-              <div class="relative w-full overflow-hidden rounded-lg bg-brand-bg/50 border border-brand-primary/40 mb-4">
-                <img 
-                  src={`${cleanBase}images/${visual.filename}`} 
-                  alt={visual.title}
-                  class="mx-auto max-h-[500px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.01]"
-                  loading="lazy"
-                />
-              </div>
-              <div class="border-t border-brand-primary/40 pt-4 flex flex-col sm:flex-row gap-4 items-start justify-between">
-                <div class="max-w-3xl">
-                  <h3 class="font-display text-lg font-bold text-brand-text group-hover:bg-gradient-to-r group-hover:from-brand-accent group-hover:to-brand-violet group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200">
-                    <span class="text-brand-accent/60 mr-1.5 font-mono">Fig {index + 1}.</span> {visual.title}
-                  </h3>
-                  <p class="text-xs text-brand-muted mt-1 leading-relaxed font-sans">
-                    {visual.description}
-                  </p>
-                </div>
-                <div class="flex-shrink-0">
-                  <span class="inline-flex items-center rounded-full bg-brand-secondary/40 border border-brand-secondary/50 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-brand-muted uppercase font-mono">
-                    Plot {index + 1}
-                  </span>
-                </div>
-              </div>
+          <h1 class="font-display text-3xl font-extrabold tracking-tight bg-gradient-to-r from-brand-text via-brand-text to-brand-accent bg-clip-text text-transparent sm:text-4xl md:text-5xl leading-tight pb-1">
+            {title}
+          </h1>
+          
+          <div class="mt-4 flex flex-wrap items-center gap-4 text-xs text-brand-muted font-medium">
+            <div class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <time datetime={date.toISOString()}>{formattedDate}</time>
             </div>
-          ))}
-        </div>
-      </section>
+            <span>•</span>
+            <div class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>{visualizations.length} Visualizations</span>
+            </div>
+          </div>
 
-      <!-- Bottom Navigation Back link -->
-      <footer class="mt-16 border-t border-brand-primary pt-8 flex justify-center">
-        <a 
-          href={`${cleanBase}#projects`} 
-          class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
-        >
-          Return to Projects Grid
-        </a>
-      </footer>
+          <p class="mt-6 text-base sm:text-lg text-brand-text/90 italic font-sans leading-relaxed border-l-2 border-brand-accent pl-4 bg-brand-primary/10 py-3 rounded-r-lg">
+            {description}
+          </p>
 
+          <!-- Tags List -->
+          <div class="flex flex-wrap gap-2 mt-6">
+            {tags.map((tag) => (
+              <span class="rounded bg-brand-primary/80 border border-brand-primary px-3 py-1 text-xs text-brand-text font-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        <!-- Markdown Core Explanation (Prose class) -->
+        <section class="prose prose-invert prose-cyan max-w-none font-sans leading-relaxed prose-headings:font-display prose-headings:font-extrabold prose-a:text-brand-accent prose-strong:text-brand-text prose-code:text-brand-accent">
+          <Content />
+        </section>
+
+        <!-- Separator -->
+        <hr class="my-12 border-brand-primary/40" />
+
+        <!-- Data Visualizations Gallery -->
+        <section class="mt-12">
+          <div class="mb-8">
+            <h2 class="font-display text-2xl font-extrabold tracking-tight text-brand-text sm:text-3xl">
+              <span class="bg-gradient-to-r from-brand-accent to-brand-violet bg-clip-text text-transparent font-extrabold">#</span> Data Visualizations Gallery
+            </h2>
+            <p class="mt-1 text-sm text-brand-muted">
+              Strict statistical diagrams, charts, and analysis plots generated for this project.
+            </p>
+          </div>
+
+          <div class="space-y-12">
+            {visualizations.map((visual, index) => (
+              <div class="group relative overflow-hidden rounded-xl border border-brand-primary bg-brand-primary/20 p-5 shadow-brand-md transition-all duration-300 hover:border-brand-accent/20">
+                <div class="relative w-full overflow-hidden rounded-lg bg-brand-bg/50 border border-brand-primary/40 mb-4">
+                  <img 
+                    src={`${cleanBase}images/${visual.filename}`} 
+                    alt={visual.title}
+                    class="mx-auto max-h-[500px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="border-t border-brand-primary/40 pt-4 flex flex-col sm:flex-row gap-4 items-start justify-between">
+                  <div class="max-w-3xl">
+                    <h3 class="font-display text-lg font-bold text-brand-text group-hover:bg-gradient-to-r group-hover:from-brand-accent group-hover:to-brand-violet group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200">
+                      <span class="text-brand-accent/60 mr-1.5 font-mono">Fig {index + 1}.</span> {visual.title}
+                    </h3>
+                    <p class="text-xs text-brand-muted mt-1 leading-relaxed font-sans">
+                      {visual.description}
+                    </p>
+                  </div>
+                  <div class="flex-shrink-0">
+                    <span class="inline-flex items-center rounded-full bg-brand-secondary/40 border border-brand-secondary/50 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-brand-muted uppercase font-mono">
+                      Plot {index + 1}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Bottom Navigation Back link -->
+        <footer class="mt-16 border-t border-brand-primary/40 pt-8 flex justify-center">
+          <a 
+            href={`${cleanBase}#projects`} 
+            class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-accent to-brand-violet px-6 py-3 text-sm font-semibold text-brand-bg hover:opacity-90 hover:shadow-[0_0_20px_rgba(123,97,255,0.35)] hover:-translate-y-[1px] transition-all duration-200 cursor-pointer"
+          >
+            Return to Projects Grid
+          </a>
+        </footer>
+
+      </div>
     </div>
   </article>
 </Layout>
