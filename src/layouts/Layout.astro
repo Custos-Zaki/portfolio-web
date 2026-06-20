@@ -56,11 +56,9 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
         color2="#2C5EAD" 
         mouseInfluence={0.1}
       />
-      <!-- Cyber Grid Overlay -->
-      <div class="absolute inset-0 z-0 cyber-grid opacity-[0.5] pointer-events-none"></div>
     </div>
     <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 w-full border-b border-brand-primary bg-brand-bg/85 backdrop-blur-md transition-all duration-300">
+    <header class="sticky top-0 z-50 w-full border-b border-brand-primary bg-brand-bg/60 backdrop-blur-md transition-all duration-300">
       <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href={cleanBase} class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-brand-text hover:opacity-90 transition-opacity duration-200 cursor-pointer">
           <img src={`${cleanBase}images/logo_custos.png`} alt="custos.zaki logo" class="h-8 w-auto object-contain" />
@@ -83,7 +81,7 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-brand-primary bg-brand-bg py-12 text-brand-muted">
+    <footer class="border-t border-brand-primary bg-brand-bg/40 backdrop-blur-sm py-12 text-brand-muted">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div class="text-center md:text-left">
