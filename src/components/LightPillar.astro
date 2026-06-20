@@ -207,7 +207,7 @@ const {
         float rotC = uRotCos;
         float rotS = uRotSin;
         if(uInteractive && (uMouse.x != 0.0 || uMouse.y != 0.0)) {
-          float a = uMouse.x * 6.283185;
+          float a = (uPillarRotCos * uMouse.x + uPillarRotSin * uMouse.y) * 6.283185;
           rotC = cos(a);
           rotS = sin(a);
         }
