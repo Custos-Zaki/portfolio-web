@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import SoftAurora from '../components/SoftAurora.astro';
+import LightPillar from '../components/LightPillar.astro';
 
 interface Props {
   title: string;
@@ -47,14 +47,19 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-brand-bg relative overflow-x-hidden">
     <!-- Animated WebGL Aurora Background -->
     <div class="fixed inset-0 -z-30 overflow-hidden bg-brand-bg pointer-events-none select-none">
-      <!-- SoftAurora WebGL Background -->
-      <SoftAurora 
-        speed={0.4} 
-        scale={1.6} 
-        brightness={0.7} 
-        color1="#4BB8FA" 
-        color2="#2C5EAD" 
-        mouseInfluence={0.1}
+      <!-- LightPillar WebGL Background -->
+      <LightPillar
+        topColor="#4BB8FA"
+        bottomColor="#2C5EAD"
+        intensity={1.0}
+        rotationSpeed={0.3}
+        glowAmount={0.005}
+        pillarWidth={3.0}
+        pillarHeight={0.4}
+        noiseIntensity={0.5}
+        pillarRotation={0}
+        interactive={true}
+        mixBlendMode="normal"
       />
     </div>
     <!-- Header / Navbar -->

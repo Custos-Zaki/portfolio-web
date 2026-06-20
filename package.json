@@ -14,11 +14,11 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.2",
-    "ogl": "^1.0.11",
     "rehype-katex": "^7.0.1",
     "remark-github-alerts": "^0.1.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19"
