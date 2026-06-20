@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SoftAurora from '../components/SoftAurora.astro';
 
 interface Props {
   title: string;
@@ -44,19 +45,19 @@ const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-accent selection:text-brand-bg relative overflow-x-hidden">
-    <!-- Animated Aurora Background -->
+    <!-- Animated WebGL Aurora Background -->
     <div class="fixed inset-0 -z-30 overflow-hidden bg-brand-bg pointer-events-none select-none">
+      <!-- SoftAurora WebGL Background -->
+      <SoftAurora 
+        speed={0.4} 
+        scale={1.6} 
+        brightness={0.7} 
+        color1="#4BB8FA" 
+        color2="#2C5EAD" 
+        mouseInfluence={0.1}
+      />
       <!-- Cyber Grid Overlay -->
-      <div class="absolute inset-0 z-0 cyber-grid opacity-[0.7] pointer-events-none"></div>
-
-      <!-- Aurora Glow Layer 1 (Cyan - Top Left) -->
-      <div class="absolute top-[-15%] left-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-brand-accent/6 blur-[120px] pointer-events-none select-none animate-aurora-1"></div>
-
-      <!-- Aurora Glow Layer 2 (Violet - Bottom Right) -->
-      <div class="absolute bottom-[-15%] right-[-15%] w-[65vw] h-[65vw] max-w-[950px] max-h-[950px] rounded-full bg-brand-violet/5 blur-[120px] pointer-events-none select-none animate-aurora-2"></div>
-
-      <!-- Aurora Glow Layer 3 (Soft Cyan/Violet mix - Center/Right) -->
-      <div class="absolute top-[20%] right-[-10%] w-[55vw] h-[55vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-br from-brand-accent/4 to-brand-violet/4 blur-[110px] pointer-events-none select-none animate-aurora-3"></div>
+      <div class="absolute inset-0 z-0 cyber-grid opacity-[0.5] pointer-events-none"></div>
     </div>
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 w-full border-b border-brand-primary bg-brand-bg/85 backdrop-blur-md transition-all duration-300">
