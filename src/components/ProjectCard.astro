@@ -9,71 +9,75 @@ const { project } = Astro.props;
 const { title, description, date, tags, coverImage, category } = project.data;
 const baseUrl = import.meta.env.BASE_URL;
 const cleanBase = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
-
 const cleanSlug = project.id.endsWith('/index') ? project.id.slice(0, -6) : project.id;
 
-// Format date
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
-});
+}).toUpperCase();
+
+const visualCount = String(project.data.visualizations?.length || 0).padStart(2, '0');
+const swatchColors = ["bg-white", "bg-[#4A89C8]", "bg-[#B8C9D9]", "bg-[#879BAE]"];
 ---
 
 <a 
   href={`${cleanBase}projects/${cleanSlug}/`} 
-  class="group block relative overflow-hidden rounded-xl border border-brand-secondary/60 bg-brand-primary p-5 shadow-brand-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/30 hover:shadow-[0_0_20px_rgba(75,184,250,0.06)] cursor-pointer"
+  class="group block relative h-full clip-chamfer-br bg-[#2D3E4E] p-4 sm:p-5 transition-all duration-300 hover:bg-[#243342] cursor-pointer"
 >
-  <!-- Cyber-grid ambient accent inside card -->
-  <div class="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"></div>
-
   <div class="relative z-10 flex flex-col h-full justify-between">
+    
     <div>
-      <!-- Cover Image Wrapper with HUD Frame -->
-      <div class="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-bg mb-4 border border-brand-secondary/60">
+      <!-- Chamfered Glacier Image Frame (Adaptasi Kartu Katalog #B8C9D9 FRZN) -->
+      <div class="clip-chamfer-sm relative aspect-[16/10] w-full overflow-hidden bg-[#B8C9D9] mb-4 p-2 border border-white/25">
+        <!-- Radial Floor Shadow -->
+        <div class="glacier-floor-shadow absolute bottom-1 inset-x-4 h-4 rounded-full pointer-events-none"></div>
+        
         <img 
           src={`${cleanBase}images/${coverImage}`} 
-          alt={`${title} Cover`}
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-102"
+          alt={title}
+          class="relative z-10 h-full w-full object-cover rounded-[2px] transition-transform duration-500 group-hover:scale-[1.03]"
           loading="lazy"
         />
-        <!-- Tech HUD corner overlays -->
-        <div class="absolute top-1.5 right-1.5 h-2.5 w-2.5 border-t-2 border-r-2 border-brand-accent/30"></div>
-        <div class="absolute bottom-1.5 left-1.5 h-2.5 w-2.5 border-b-2 border-l-2 border-brand-accent/30"></div>
-        
-        <span class="absolute top-2.5 left-2.5 rounded bg-gradient-to-r from-brand-accent/15 to-brand-violet/15 backdrop-blur-md px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-brand-accent border border-brand-accent/20">
+
+        <!-- Solid White Category Pill (Gaya Tombol FILTERS FRZN) -->
+        <span class="absolute top-3 left-3 z-20 rounded-[3px] bg-white px-2.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-[0.14em] text-[#1E2936] shadow-sm">
           {category}
+        </span>
+
+        <!-- Corner Action Arrow Indicator -->
+        <span class="absolute top-3 right-3 z-20 w-6 h-6 rounded-[3px] bg-[#1E2936]/85 backdrop-blur-sm text-white flex items-center justify-center text-[11px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          ↗
         </span>
       </div>
 
-      <!-- Date and Meta -->
-      <div class="flex items-center justify-between text-[11px] font-mono text-brand-muted mb-2">
-        <time datetime={date.toISOString()}>{formattedDate}</time>
-        <div class="flex items-center gap-1 text-brand-accent/80">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
-          </svg>
-          <span>{project.data.visualizations.length} Visuals</span>
-        </div>
+      <!-- Technical Telemetry Row (Date & Visuals Count) -->
+      <div class="flex items-center justify-between text-[10px] font-mono tracking-[0.14em] text-[#879BAE] uppercase mb-2">
+        <time datetime={date.toISOString()}>[ {formattedDate} ]</time>
+        <span class="text-[#B8C9D9]">
+          FIGS // {visualCount}
+        </span>
       </div>
 
-      <!-- Title -->
-      <h3 class="font-display text-lg font-bold tracking-tight text-brand-text group-hover:bg-gradient-to-r group-hover:from-brand-accent group-hover:to-brand-violet group-hover:bg-clip-text group-hover:text-transparent transition-all duration-200 mb-2">
-        {title}
+      <!-- Condensed Display Project Title -->
+      <h3 class="font-display text-2xl tracking-tight text-white uppercase leading-[0.98] mb-2 group-hover:text-[#B8C9D9] transition-colors">
+        {title}<sup class="text-[10px] ml-0.5 font-sans font-bold text-[#879BAE]">™</sup>
       </h3>
 
-      <!-- Description -->
-      <p class="text-xs text-brand-muted line-clamp-3 mb-4 leading-relaxed font-sans">
+      <!-- Crisp, Concise Description (Clamped to 2 Lines for K.I.S.S. Cleanliness) -->
+      <p class="text-xs text-[#B0C2D1] line-clamp-2 mb-5 leading-relaxed font-sans">
         {description}
       </p>
     </div>
 
-    <!-- Tags footer -->
-    <div class="flex flex-wrap gap-1.5 mt-auto pt-3 border-t border-brand-secondary/40">
-      {tags.map((tag) => (
-        <span class="rounded bg-brand-secondary/50 px-2 py-0.5 text-[10px] font-mono text-brand-muted border border-brand-secondary/35 transition-colors duration-200 group-hover:border-brand-accent/15 group-hover:text-brand-text">
-          #{tag}
+    <!-- Bottom Spec Swatch Tags (Gaya ● WHITE ● SILVER pada Katalog FRZN) -->
+    <div class="flex flex-wrap items-center gap-x-3.5 gap-y-1.5 mt-auto pt-3 border-t border-white/15">
+      {tags.slice(0, 4).map((tag, index) => (
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-[0.1em] uppercase text-[#B0C2D1] group-hover:text-white transition-colors">
+          <i class={`w-1.5 h-1.5 rounded-full inline-block ${swatchColors[index % swatchColors.length]}`}></i>
+          {tag}
         </span>
       ))}
     </div>
+
   </div>
 </a>

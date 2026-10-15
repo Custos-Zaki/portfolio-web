@@ -1,46 +1,77 @@
 ---
 const skills = [
   {
+    id: "SPEC_01",
+    metric: "PROD // MODELING",
     name: "Machine Learning",
-    description: "Supervised & unsupervised learning — classification, regression, clustering, dimensionality reduction. Full pipeline from raw data to deployed model.",
+    description: "Production-grade predictive models. Classification, regression, and clustering engineered for measurable business ROI.",
     techs: ["Scikit-Learn", "XGBoost", "Python", "Pandas"]
   },
   {
+    id: "SPEC_02",
+    metric: "RIGOR // INFERENCE",
     name: "Statistical Analysis",
-    description: "Hypothesis testing, non-parametric correlation, probability modeling, distribution fitting, and rigorous exploratory analysis.",
+    description: "Rigorous hypothesis testing, distribution fitting, and non-parametric inference to validate decisions before production.",
     techs: ["R", "Python", "SciPy", "StatsModels"]
   },
   {
-    name: "Data Pipelines & Integration",
-    description: "Real-time ingestion pipelines, automated ETL workflows, multi-system data integration, CSV/JSON processing, and scheduled reporting architectures.",
-    techs: ["Python", "SQL", "APIs", "File Systems"]
+    id: "SPEC_03",
+    metric: "AUTO // INGESTION",
+    name: "Data Pipelines & ETL",
+    description: "Fault-tolerant ETL workflows and automated ingestion architectures that turn raw telemetry into query-ready datasets.",
+    techs: ["Python", "SQL", "REST APIs", "File Systems"]
   },
   {
+    id: "SPEC_04",
+    metric: "QUANT // REVENUE",
     name: "Business Analytics",
-    description: "Customer segmentation, RFM analysis, cohort modeling, probabilistic CLV forecasting, and revenue attribution analysis.",
+    description: "Probabilistic CLV forecasting, RFM segmentation, and cohort attribution models that directly drive revenue retention.",
     techs: ["Python", "Pandas", "BG/NBD", "Gamma-Gamma"]
   }
 ];
+
+const dotColors = ["bg-white", "bg-[#B8C9D9]", "bg-[#4A89C8]", "bg-[#879BAE]"];
 ---
 
-<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto">
+<div class="grid gap-6 sm:grid-cols-2 w-full">
   {skills.map((skill) => (
-    <div class="relative overflow-hidden rounded-xl border border-brand-secondary/60 bg-brand-primary p-6 shadow-brand-sm transition-all duration-300 hover:border-brand-accent/30 hover:shadow-[0_0_15px_rgba(0,212,255,0.04)]">
-      <div class="mb-3">
-        <h4 class="font-display text-lg font-bold text-brand-text">
-          {skill.name}
-        </h4>
+    <article class="group clip-chamfer-sm relative bg-[#1E2936]/85 border border-white/15 p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:bg-[#1E2936] hover:border-white/45">
+      
+      <div>
+        <!-- Top Technical Telemetry Bar -->
+        <div class="flex items-center justify-between text-[10px] font-mono tracking-[0.15em] text-[#879BAE] uppercase pb-3 mb-4 border-b border-white/10">
+          <span class="text-[#B8C9D9] group-hover:text-white transition-colors">
+            [ {skill.id} ]
+          </span>
+          <span>{skill.metric}</span>
+        </div>
+
+        <!-- Condensed Display Heading with Trademark Motif -->
+        <div class="flex items-baseline justify-between gap-2 mb-2.5">
+          <h3 class="font-display text-2xl sm:text-3xl tracking-tight text-white uppercase leading-none">
+            {skill.name}<sup class="text-xs ml-0.5 font-sans font-bold text-[#B8C9D9]">™</sup>
+          </h3>
+          <span class="text-xs font-mono text-[#879BAE] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+            ↗
+          </span>
+        </div>
+
+        <!-- K.I.S.S. Engineering Outcome Description -->
+        <p class="text-xs text-[#B0C2D1] leading-relaxed font-sans mb-6">
+          {skill.description}
+        </p>
       </div>
-      <p class="text-xs text-brand-muted leading-relaxed mb-4 min-h-[48px] font-sans">
-        {skill.description}
-      </p>
-      <div class="flex flex-wrap gap-1">
-        {skill.techs.map((tech) => (
-          <span class="text-[10px] font-mono text-brand-text bg-brand-secondary/35 px-2 py-0.5 rounded border border-brand-secondary/30">
+
+      <!-- FRZN Swatch-Style Tech Stack Footer -->
+      <div class="pt-3.5 border-t border-white/10 flex flex-wrap items-center gap-x-4 gap-y-2">
+        {skill.techs.map((tech, idx) => (
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-[0.12em] uppercase text-white">
+            <i class={`w-2 h-2 rounded-full inline-block ${dotColors[idx % dotColors.length]}`}></i>
             {tech}
           </span>
         ))}
       </div>
-    </div>
+
+    </article>
   ))}
 </div>
