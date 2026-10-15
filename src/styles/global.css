@@ -1,24 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-display: "Space Grotesk", sans-serif;
+  /* Typography Tokens - FRZN System */
+  --font-display: "Anton", "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
   --font-sans: "Inter", sans-serif;
 
-  --color-brand-bg: #0a1120;       /* Dark Navy Background */
-  --color-brand-primary: #121e36;  /* Card Surface */
-  --color-brand-secondary: #2C5EAD;/* Cobalt Blue / Borders */
-  --color-brand-accent: #C4E2F5;   /* Ice Blue Accent / Headings */
-  --color-brand-violet: #4BB8FA;   /* Sky Blue Accent */
-  --color-brand-text: #C4E2F5;     /* Ice Blue Text */
-  --color-brand-muted: #4BB8FA;    /* Sky Blue Muted Text */
+  /* FRZN Core Arctic Palette */
+  --color-frzn-outer: #697A8A;
+  --color-frzn-surface: #4E6172;
+  --color-frzn-dark: #2D3E4E;
+  --color-frzn-glacier: #B8C9D9;
+  --color-frzn-ice: #95AABF;
+  --color-frzn-ink: #1E2936;
+  --color-frzn-muted: #879BAE;
 
-  --shadow-brand-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-brand-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-brand-lg: 0 10px 15px rgba(0,0,0,0.1);
-  --shadow-brand-xl: 0 20px 25px rgba(0,0,0,0.15);
+  /* Remapped Brand Tokens (Agar komponen Layout, ProjectCard & SkillGrid otomatis seragam) */
+  --color-brand-bg: #4E6172;        /* Main Arctic Slate Surface */
+  --color-brand-primary: #2D3E4E;   /* Deep Slate Card / Panel Surface */
+  --color-brand-secondary: #879BAE; /* Subtle Technical Hairline Border */
+  --color-brand-accent: #FFFFFF;    /* Crisp Stark White Accent & Headings */
+  --color-brand-violet: #B8C9D9;    /* Glacier Ice Blue Highlight */
+  --color-brand-text: #FFFFFF;      /* Primary White Text */
+  --color-brand-muted: #B0C2D1;     /* Secondary Icy Slate Text */
 
+  /* Shadows */
+  --shadow-brand-sm: 0 2px 4px rgba(18, 26, 36, 0.15);
+  --shadow-brand-md: 0 6px 12px rgba(18, 26, 36, 0.22);
+  --shadow-brand-lg: 0 14px 28px rgba(18, 26, 36, 0.30);
+  --shadow-brand-xl: 0 24px 48px rgba(18, 26, 36, 0.40);
+
+  /* Animations */
   --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 0.4s ease-out forwards;
 }
@@ -43,147 +57,112 @@
   }
 }
 
-/* Global resets and body styling */
 html {
   background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
   scroll-behavior: smooth;
 }
 
 body {
+  background-color: var(--color-brand-bg);
   color: var(--color-brand-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-/* Custom scrollbar for data-focused theme */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-brand-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-brand-primary);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brand-secondary);
-}
-
-/* Futuristic background overlays */
-.cyber-grid {
-  background-image: 
-    linear-gradient(to right, rgba(75, 184, 250, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(75, 184, 250, 0.015) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(75, 184, 250, 0.15);
-}
-
-.glow-violet {
-  box-shadow: 0 0 20px rgba(44, 94, 173, 0.15);
-}
-
-.hexagon-wrapper {
-  position: relative;
-  width: 180px;
-  height: 200px;
-}
-
-.hexagon-border {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--color-brand-accent), var(--color-brand-violet));
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  z-index: 0;
-  filter: drop-shadow(0 0 10px rgba(75, 184, 250, 0.3));
-}
-
-.hexagon-inner {
-  position: absolute;
-  inset: 2px;
-  background: var(--color-brand-primary);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  z-index: 1;
-  overflow: hidden;
-}
-
-
-/* Custom GitHub-style alerts/callouts styled for dark/neon cyberpunk theme */
-.markdown-alert {
-  margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
-  border-left: 4px solid transparent;
-  border-radius: 0.5rem;
-  background-color: rgba(18, 30, 54, 0.4); /* brand-primary with opacity */
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.markdown-alert p {
-  margin: 0;
-}
-
-.markdown-alert p + p {
-  margin-top: 0.5rem;
-}
-
-.markdown-alert-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
 }
 
-/* CAUTION / WARNING alert styling (Red/Orange theme) */
-.markdown-alert-caution, .markdown-alert-warning {
-  border-color: #EF4444; /* red-500 */
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.04);
-}
-.markdown-alert-caution .markdown-alert-title, .markdown-alert-warning .markdown-alert-title {
-  color: #EF4444;
+/* ==========================================================================
+   FRZN DESIGN SYSTEM UTILITIES (Chamfered Corners, Polygons, HUD & Barcode)
+   ========================================================================== */
+
+/* Potongan sudut 45 derajat di kanan bawah (Ukuran Standar Kartu Katalog) */
+.clip-chamfer-br {
+  border-radius: 4px;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 28px),
+    calc(100% - 28px) 100%,
+    0 100%
+  );
 }
 
-/* NOTE alert styling (Blue/Cyan theme) */
-.markdown-alert-note {
-  border-color: var(--color-brand-accent);
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.04);
-}
-.markdown-alert-note .markdown-alert-title {
-  color: var(--color-brand-accent);
-}
-
-/* TIP alert styling (Green/Emerald theme) */
-.markdown-alert-tip {
-  border-color: #10B981; /* emerald-500 */
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.04);
-}
-.markdown-alert-tip .markdown-alert-title {
-  color: #10B981;
+/* Potongan sudut 45 derajat ukuran kecil (Untuk Thumbnail & Kartu Metrik) */
+.clip-chamfer-sm {
+  border-radius: 4px;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    0 100%
+  );
 }
 
-/* IMPORTANT alert styling (Purple/Violet theme) */
-.markdown-alert-important {
-  border-color: var(--color-brand-violet);
-  box-shadow: 0 0 15px rgba(123, 97, 255, 0.04);
+/* Tombol Poligon Dekagonal (10 Sisi) */
+.btn-polygon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.markdown-alert-important .markdown-alert-title {
-  color: var(--color-brand-violet);
+
+.btn-polygon:hover {
+  transform: scale(1.06);
+}
+
+/* Efek Teks Graffiti Airbrush Blur di Latar Belakang */
+.graffiti-watermark {
+  font-family: var(--font-display);
+  color: rgba(255, 255, 255, 0.14);
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+/* Bayangan Lantai Radial (Seperti di bawah objek pada kartu #B8C9D9) */
+.glacier-floor-shadow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(24, 36, 48, 0.35) 0%,
+    rgba(24, 36, 48, 0) 70%
+  );
+}
+
+/* Barcode CSS Murni untuk Footer Manifesto */
+.barcode-pattern {
+  width: 104px;
+  height: 24px;
+  background: repeating-linear-gradient(
+    to right,
+    #ffffff 0px,
+    #ffffff 2px,
+    transparent 2px,
+    transparent 4px,
+    #ffffff 4px,
+    #ffffff 5px,
+    transparent 5px,
+    transparent 8px,
+    #ffffff 8px,
+    #ffffff 11px,
+    transparent 11px,
+    transparent 13px,
+    #ffffff 13px,
+    #ffffff 14px,
+    transparent 14px,
+    transparent 17px
+  );
 }
